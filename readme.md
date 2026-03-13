@@ -18,18 +18,11 @@ grazz is a desktop toy and idle game written in Rust that renders procedurally a
 
 ### Installation
 
-Ensure you have the Rust toolchain installed, then clone the repository and build:
+Clone, build the project using cargo and run it.
 
 ```bash
 cargo build --release
 
-```
-
-### Running
-
-Execute the binary to start the grass simulation:
-
-```bash
 ./target/release/grazz
 
 ```
@@ -49,10 +42,20 @@ You can interact with **grazz** by sending text commands to the Unix socket loca
 | `UP_MONEY` | Purchases a money upgrade (increases yield per blade of grass). |
 | `STATE` | Returns the full current game state in JSON format. |
 
-**Example (triggering a mow from the terminal):**
+**Cli example**
 
 ```bash
 echo "MOW" | nc -U /tmp/grazz_ipc.sock
+
+```
+
+## Example ironbar integration
+
+```json
+{
+  "type": "label",
+  "label": "Grass {{1000:echo 'BALANCE' | nc -q 0 -U /tmp/grazz_ipc.sock}}"
+}
 
 ```
 
